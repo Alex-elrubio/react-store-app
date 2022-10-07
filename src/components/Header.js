@@ -3,13 +3,17 @@ import { Link } from "react-router-dom";
 import GetIcon from "components/GetIcon";
 import clsx from "clsx";
 import CategoryItem from "./CategoryItem";
-import useMakeRequest from "hooks/useMakeRequest";
 import { BasketContext } from "context/BasketContext";
 import { useContext } from "react";
+import {CATEGORY_FIND} from 'apollo/queries';
+import {useQuery} from "@apollo/client";
+import _ from 'lodash';
 
 const Header = () => {
-  const result = useMakeRequest("https://fakestoreapi.com/products/categories");
   const { basketItems, setBasketIsOpen } = useContext(BasketContext);
+  const {data} = useQuery(CATEGORY_FIND, {variables: {query: "[{\"parent\":null}]"}});
+
+  console.log(data)
 
   return (
     <header className={styles.header}>
@@ -25,7 +29,7 @@ const Header = () => {
               <Link to="/" onClick={(e) => e.preventDefault()} className={styles.a}>
                 Categories
               </Link>
-              <ul className={styles.subMenu}>{result.data ? result.data.map((cat, index) => <CategoryItem data={cat} key={index} />) : <div>{result.error}</div>}</ul>
+              <ul className={styles.subMenu}>{_.get(data, 'CategoryFind', []).map((cat, index) => <CategoryItem data={cat} key={index} />)}</ul>
             </li>
             <li>
               <Link
