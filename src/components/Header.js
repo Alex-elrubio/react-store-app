@@ -13,7 +13,6 @@ const Header = () => {
   const { basketItems, setBasketIsOpen } = useContext(BasketContext);
   const {data} = useQuery(CATEGORY_FIND, {variables: {query: "[{\"parent\":null}]"}});
 
-  console.log(data)
 
   return (
     <header className={styles.header}>

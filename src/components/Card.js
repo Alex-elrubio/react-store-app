@@ -1,24 +1,29 @@
 import styles from "styles/Card.module.scss";
 import { Link } from "react-router-dom";
-import slugify from "slugify";
+import slugify from "slugify";//
+import _ from 'lodash';
 
 import AddToBasketBtn from "components/AddToBasketBtn";
 
 const Card = ({ product }) => {
   return (
     <div className={styles.card}>
-      <Link to={`/product/${slugify(product.title, { lower: true, strict: true })}-${product.id}`} className={styles.content}>
-        <div className={styles.img}>
-          <img src={product.image} alt="" />
+      <Link to={`/product/${product._id}`} className={styles.content}>
+        { !_.isEmpty(product.images) ?
+          <div className={styles.img}>
+          <img src={product.images[0].url } alt="" />
         </div>
+        : null}
         <div className={styles.info}>
           <div className={styles.title}>
-            <h3>{product.title}</h3>
+            <h3>{product.name}</h3>
           </div>
           <div className={styles.footer}>
-            <div className={styles.price}>
+            {product.price ?
+            (<div className={styles.price}>
               {product.price.toFixed(2)} <small>TRY</small>
-            </div>
+            </div>)
+            : null }
             <div className={styles.btn}>
               <AddToBasketBtn data={product} />
             </div>

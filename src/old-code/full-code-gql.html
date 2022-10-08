@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop</title>
+  <style>
+    body {
+      font-family: system-ui;
+      padding: 0;
+    }
+    header {
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+    }
+    header a {
+      margin: 5px 10px;
+      border: 1px solid grey;
+      padding: 5px 10px;
+    }
+    a {
+      text-decoration: none;
+      color: black;
+      padding: 5px 10px;
+      transition-property: transform, border-radius;
+      transition-duration: .5s;
+    }
+    .cat {
+      color: grey;
+    }
+    img {
+      max-width: 150px;
+    }
+    #userBox {
+      display: flex;
+      align-items: baseline;
+      flex-direction: row-reverse;
+    }
+
+    #authBox {
+      display: flex;
+      min-width: 150px;
+      justify-content: space-between;
+    }
+    aside {
+      display: flex;
+      flex-direction: column;
+      margin-right: 150px;
+    }
+    aside > a {
+      margin-bottom: 15px;
+    }
+
+    #mainContainer {
+      display: flex;
+    }
+    button, .loginBtn  {
+      margin: 5px 10px;
+      border: 1px solid #FB8F1D;
+      padding: 5px 10px;
+      background-color: sandybrown;
+      color: white;
+      font-size: 16px;
+      font-family: system-ui;
+    }
+    .showMore, #userBox > a {
+      margin: 5px 10px;
+      border: 1px solid #FB8F1D;
+      padding: 5px 10px;
+    }
+    a:hover {
+      transform: translateY(5px);
+      box-shadow: 0 0 11px sandybrown;
+      border-radius: 8px;
+      animation-delay: .5s;
+    }
+    .card {
+      padding: 15px 20px;
+      margin: 35px;
+      border: 1px solid lightgrey;
+      border-radius: 20px;
+      display: flex;
+      transition-property: transform;
+      transition-duration: .5s;
+      width: 400px;
+      justify-content: space-between;
+    }
+    .card:hover {
+      transform: translateX(10px);
+    }
+    button:hover {
+      color: #FB8F1D;
+      background-color: white;
+      box-shadow: 0 0 11px sandybrown;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <header>
+
+    <a href="">Main</a>
+      <a id="cartIcon" href="#/cart">
+        Cart
+        <span id="cartCounter"></span>
+      </a>
+      <div id="userBox"></div>
+    <div id="authBox"></div>
+    </div>
+  </header>
+
+
+  <div id='mainContainer'>
+    <aside id='aside'>
+    </aside>
+
+    <main id='main'>
+      <h3>Welcome to our shop! Let's find something for you :)</h3>
+    </main>
+
+  </div>
+
+</div>
+  <script src='index.js'></script>
+</body>
+
+</html>
