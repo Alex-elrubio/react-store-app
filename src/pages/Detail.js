@@ -6,6 +6,7 @@ import styles from "styles/Detail.module.scss";
 import { useQuery } from "@apollo/client";
 import { GOOD_FIND_ONE } from "apollo/queries";
 import _ from 'lodash';
+import {IMAGES_URL} from '../config';
 
 const Detail = () => {
   const {_id} = useParams();
@@ -34,7 +35,7 @@ const Detail = () => {
           <div className={styles.top}>
               { !_.isEmpty(product.images) ?
                 <div className={styles.img}>
-                  <img src={product.images[0].url } alt="" />
+                  <img src={IMAGES_URL + product.images[0].url } alt="" />
                 </div>
               : null}
             <div className={styles.info}>
