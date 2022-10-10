@@ -7,7 +7,7 @@ import _ from 'lodash';
 
 const Home = () => {
 
-  const {data, loading, error} = useQuery(GOOD_FIND, {variables: {query: "[{\"parent\":null}]"}});
+  const {data, loading, error} = useQuery(GOOD_FIND, {variables: {query: "[{}]"}});
     console.log(data);
 
   if (!data) {
@@ -35,7 +35,7 @@ const Home = () => {
           </div>
           <div className={styles.row}>
             {
-              _.get(data, 'GoodFind').map((product, key) => <Card product={product} key={key} />)
+              _.get(data, 'GoodFind').filter(({name}) => name).map((product, key) => <Card product={product} key={key} />)
             }
           </div>
         </div>

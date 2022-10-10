@@ -1,8 +1,9 @@
 import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { onError } from '@apollo/client/link/error';
+import {GRAPHQL_URL} from '../config';
 
-const httpLink = new HttpLink({ uri: 'http://shop-roles.node.ed.asmer.org.ua/graphql' });
+const httpLink = new HttpLink({ uri: GRAPHQL_URL });
 const authLink = setContext(async (_, { headers }) => {
   const token = localStorage.authToken;
 
