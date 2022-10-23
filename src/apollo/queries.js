@@ -34,3 +34,17 @@ query GoodFindOne($query: String) {
 	}
 }
 `;
+export const CATEGORY_FIND_ONE = gql`
+query CategoryFindOne($query: String) {
+  CategoryFindOne(query:$query) {
+    _id
+    name
+    goods{  
+      _id
+      name
+      images{url}
+      price
+    }
+  }
+}`;
+
