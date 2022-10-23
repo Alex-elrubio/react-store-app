@@ -7,10 +7,12 @@ import { BasketContext } from "context/BasketContext";
 import { useContext } from "react";
 import {CATEGORY_FIND} from 'apollo/queries';
 import {useQuery} from "@apollo/client";
+import cartStore from "stores/cartStore";
+import { observer } from 'mobx-react';
 import _ from 'lodash';
 
 const Header = () => {
-  const { basketItems, setBasketIsOpen } = useContext(BasketContext);
+  const { setBasketIsOpen } = useContext(BasketContext);
   const {data} = useQuery(CATEGORY_FIND, {variables: {query: "[{\"parent\":null}]"}});
 
 
@@ -40,7 +42,7 @@ const Header = () => {
                 }}
               >
                 <GetIcon icon="BsCart4" size={25} color="#ffffff" />
-                {basketItems.length > 0 && <span className={styles.basketLength}> {basketItems.length} </span>}
+                {cartStore.count > 0 && <span className={styles.basketLength}> {cartStore.count} </span>}
               </Link>
             </li>
           </ul>
@@ -50,4 +52,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default observer(Header);
