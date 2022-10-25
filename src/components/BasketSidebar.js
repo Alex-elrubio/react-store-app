@@ -1,36 +1,36 @@
 import styles from "styles/BasketSidebar.module.scss";
 import emptyCardImg from "images/empty_cart.svg";
 import GetIcon from "components/GetIcon";
+import {observer} from 'mobx-react';
 import Title from "components/Title";
 import clsx from "clsx";
 import BasketItem from "components/BasketItem";
-import { BasketContext } from "context/BasketContext";
-import { useContext, useRef } from "react";
+import { useRef } from "react";
+import cartStore from 'stores/cartStore';
 
 const BasketSidebar = () => {
-  const { basketIsOpen, setBasketIsOpen, basketItems, basketTotal: _basketTotal } = useContext(BasketContext);
   const container = useRef();
 
   return (
     <div
-      className={clsx(styles.sidebarContainer, basketIsOpen ? styles.show : styles.hide)}
+      className={clsx(styles.sidebarContainer, cartStore.isOpen ? styles.show : styles.hide)}
       ref={container}
-      onClick={(event) => event.target === container.current && setBasketIsOpen(false)}
+      onClick={(event) => event.target === container.current && cartStore.setIsOpen(false)}
     >
       <div className={styles.sidebar}>
         <div className={styles.header}>
           <div className={styles.title}>
             <Title txt="your basket" size={20} transform="uppercase" />
-            {<small>your basket has got {basketItems.length} items</small>}
+            {<small>your basket has got {cartStore.count} items</small>}
           </div>
-          <button className={styles.close} onClick={() => setBasketIsOpen(false)}>
+          <button className={styles.close} onClick={() => cartStore.setIsOpen(false)}>
             <GetIcon icon="BsX" size={30} />
           </button>
         </div>
-        {basketItems.length > 0 ? (
+        {cartStore.count > 0 ? (
           <>
             <div className={styles.items}>
-              {basketItems?.map((item, key) => (
+              {cartStore.items?.map((item, key) => (
                 <BasketItem data={item} key={key} />
               ))}
             </div>
@@ -42,7 +42,7 @@ const BasketSidebar = () => {
               <div className={styles.totalPrice}>
                 <small>total try</small>
                 <div className={styles.price}>
-                  <span>{_basketTotal.toFixed(2)}</span>
+                  <span>{cartStore.total.toFixed(2)}</span>
                 </div>
               </div>
               <button type="button" className={styles.confirmBtn}>
@@ -61,4 +61,4 @@ const BasketSidebar = () => {
   );
 };
 
-export default BasketSidebar;
+export default observer(BasketSidebar);

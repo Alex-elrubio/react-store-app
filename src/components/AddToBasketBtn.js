@@ -4,7 +4,7 @@ import cartStore from "stores/cartStore";
 
 const AddToBasketBtn = ({ data: product }) => {
   const addToBasket = (product) => {
-    cartStore.addItem(product);
+    cartStore.addProduct(product);
   };
 
   return (

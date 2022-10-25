@@ -11,40 +11,34 @@ import Category from "pages/Category";
 import Header from "components/Header";
 import BasketSidebar from "components/BasketSidebar";
 import Footer from "components/Footer";
-import MobileBottomNav from "components/MobileBottomNav";
 
 // HOOKS
 import useMobileDetect from "hooks/useMobileDetect";
 
-// CONTEXT
-import BasketContextProvider from "context/BasketContext";
 
 const App = () => {
   const device = useMobileDetect();
 
   return (
     <Router>
-      <BasketContextProvider>
-        <div className={clsx(device.type === "mobile" && styles.paddingForMobile, styles.container)}>
-          <Header />
-          <main className={styles.main}>
-            <Switch>
-              <Route path="/" exact>
-                <Home />
-              </Route>
-              <Route path="/product/:_id">
-                <Detail />
-              </Route>
-              <Route path="/category/:_id">
-                <Category />
-              </Route>
-            </Switch>
-          </main>
-          <Footer />
-        </div>
-        <BasketSidebar />
-        {device.type === "mobile" && <MobileBottomNav />}
-      </BasketContextProvider>
+      <div className={clsx(device.type === "mobile" && styles.paddingForMobile, styles.container)}>
+        <Header />
+        <main className={styles.main}>
+          <Switch>
+            <Route path="/" exact>
+              <Home />
+            </Route>
+            <Route path="/product/:_id">
+              <Detail />
+            </Route>
+            <Route path="/category/:_id">
+              <Category />
+            </Route>
+          </Switch>
+        </main>
+        <Footer />
+      </div>
+      <BasketSidebar />
     </Router>
   );
 };

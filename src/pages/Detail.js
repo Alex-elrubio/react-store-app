@@ -1,7 +1,5 @@
 import Title from "components/Title";
-import { BasketContext } from "context/BasketContext";
-import { useContext } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import styles from "styles/Detail.module.scss";
 import { useQuery } from "@apollo/client";
 import { GOOD_FIND_ONE } from "apollo/queries";
@@ -11,18 +9,8 @@ import {IMAGES_URL} from '../config';
 const Detail = () => {
   const {_id} = useParams();
 
-  const {data, loading, error} = useQuery(GOOD_FIND_ONE, {variables: {query: `[{\"_id\" : \"${_id}\"}]`}});
-  const { basketItems } = useContext(BasketContext);
+  const {data} = useQuery(GOOD_FIND_ONE, {variables: {query: `[{"_id" : "${_id}"}]`}});
   const product = _.get(data,'GoodFindOne', null);
-
-  const getItemFromBasket = (data) => {
-    let filter = basketItems.length > 0 && basketItems.filter((item) => item.id === data.id)[0];
-    if (filter) {
-      return filter;
-    } else {
-      return data;
-    }
-  };
 
   return (
     <section className={styles.detail}>
@@ -49,12 +37,6 @@ const Detail = () => {
                     </p>
                   </div>)
                 : null }
-              {/* <div className={styles.addToBasketAndQuantity}>
-                <div className={styles.quantityBox}>
-                  <Quantity data={getItemFromBasket(result.data)} />
-                </div>
-                <AddToBasketBtn data={result.data} />
-              </div> */}
             </div>
           </div>
           <div className={styles.bottom}>

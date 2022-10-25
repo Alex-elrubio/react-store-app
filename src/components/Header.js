@@ -3,8 +3,6 @@ import { Link } from "react-router-dom";
 import GetIcon from "components/GetIcon";
 import clsx from "clsx";
 import CategoryItem from "./CategoryItem";
-import { BasketContext } from "context/BasketContext";
-import { useContext } from "react";
 import {CATEGORY_FIND} from 'apollo/queries';
 import {useQuery} from "@apollo/client";
 import cartStore from "stores/cartStore";
@@ -12,7 +10,6 @@ import { observer } from 'mobx-react';
 import _ from 'lodash';
 
 const Header = () => {
-  const { setBasketIsOpen } = useContext(BasketContext);
   const {data} = useQuery(CATEGORY_FIND, {variables: {query: "[{\"parent\":null}]"}});
 
 
@@ -38,7 +35,7 @@ const Header = () => {
                 className={clsx(styles.basketBtn, styles.a)}
                 onClick={(e) => {
                   e.preventDefault();
-                  setBasketIsOpen((oldState) => !oldState);
+                  cartStore.setIsOpen((oldState) => !oldState);
                 }}
               >
                 <GetIcon icon="BsCart4" size={25} color="#ffffff" />
